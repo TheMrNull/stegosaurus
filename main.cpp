@@ -1,0 +1,13 @@
+#include "header.h"
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+
+int main(){
+
+  openImage();
+  
+  return 0;
+}
