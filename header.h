@@ -3,5 +3,5 @@
 #include<string>
 //functions here
 void openImage();
-std::string removeExstenstion(std::string path);
+std::string removeExt(const std::string& path);
 #endif 

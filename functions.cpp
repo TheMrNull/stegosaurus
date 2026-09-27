@@ -2,19 +2,21 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<filesystem>
 using namespace std;
 
 
 void openImage(){
   string inputPath, outPath;
-  cout << "Insert input image/path to image(no spaces allowed): ";
-  cin >> inputPath;
+  cout << "Insert input image/path(only .BMP allowed): ";
+  //cin >> inputPath;
+  getline(cin, inputPath);
   ifstream InputImage(inputPath, ios::binary);
   if(!InputImage.is_open()){
     cout << "An error occured while opening " << inputPath << endl;
     return;
   }
-  outPath = removeExstenstion(inputPath); 
+  outPath = removeExt(inputPath);
   ofstream OutputImage(outPath, ios::binary);
   
   char c;
@@ -27,8 +29,9 @@ void openImage(){
 }
 
 
-string removeExstenstion(string path){
-  string png = ".png";
-  string path2 = path.erase(path.length()-png.length());
-  return path2 + "Roar.png";  
+string removeExt(const string &path){
+  namespace fs = std::filesystem;
+  fs::path p(path);
+  p.replace_extension("");
+  return p.string() + "Roar.bmp";
 }
